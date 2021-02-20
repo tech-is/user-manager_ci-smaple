@@ -13,11 +13,24 @@ class User extends CI_Controller {
 			$this->load->model('User_model');
   }
 
-	// public function createUser()
-	// {
-	// 	$data = [];
-	// 	$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
-	// 	$this->load->view('user_manage', $data);
-	// }
+	public function index()
+	{
+		$headData["pageName"] = "ホーム";
+		$this->load->view("head", $headData);
+		$this->load->view("home");
+	}
+
+	public function register()
+	{
+		$headData["pageName"] = "新規登録";
+		$this->load->view("head", $headData);
+		$this->load->view("user_register");
+	}
+
+	public function manage()
+	{
+		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
+		$this->load->view("user_manage", $data);
+	}
 
 }

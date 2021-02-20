@@ -1,0 +1,27 @@
+.homeButtonWrapper {
+  display:flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 100px auto;
+}
+
+.btn-box {
+  width: 100px;
+}
+
+.btn {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.btn.primary {
+  background-color: #26A69A;
+}
+
+
+.btn.secondary {
+  background-color: #42A5F5;
+}
