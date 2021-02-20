@@ -22,9 +22,22 @@ class User extends CI_Controller {
 
 	public function register()
 	{
-		$headData["pageName"] = "新規登録";
-		$this->load->view("head", $headData);
-		$this->load->view("user_register");
+		if(empty($_POST)){
+			$headData["pageName"] = "新規登録";
+			$this->load->view("head", $headData);
+			$this->load->view("user_register");
+			return;
+		}
+
+		// POSTされたとき
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+		$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+		$user = [
+			"email" => $email,
+			"password" => $hashedPassword,
+		];
+		$this->User_model->insert($user);
 	}
 
 	public function manage()

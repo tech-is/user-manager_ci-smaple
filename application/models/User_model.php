@@ -89,6 +89,7 @@ class User_model extends CI_Model {
     public function insert(
         array $user
     ){
+        $user["created_at"] = time();
         $this->db
         ->insert($this->table, $user);
     }
