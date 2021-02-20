@@ -1,6 +1,6 @@
 <body>
   <h1>ユーザ情報を作成するページです</h1>
-  <form>
+  <form method="POST">
     <div class="inputGroup">
       <label for="email">
         ログインメールアドレス：
