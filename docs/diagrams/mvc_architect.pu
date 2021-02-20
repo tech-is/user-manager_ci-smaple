@@ -1,0 +1,10 @@
+@startuml
+訪問者 -> サーバ: Webページにアクセス
+autonumber
+サーバ -> Codeigniter:リクエスト情報を渡す
+Codeigniter -> Controller:Route設定を元に適切な処理を呼び出される
+Controller -> Model:データベースの情報が欲しい
+Model -> Controller:データベースの情報を返却する
+Controller -> View:データを加工しながらHTMLを生成する
+View -> 訪問者:生成されたHTMLを訪問者が受け取る
+@enduml
