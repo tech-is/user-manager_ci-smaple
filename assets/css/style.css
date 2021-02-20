@@ -26,6 +26,10 @@
   background-color: #42A5F5;
 }
 
-.inputGroup{
+.inputGroup {
   margin-bottom: 12px;
+}
+
+.errorMessage{
+  color:#d32f2f;
 }

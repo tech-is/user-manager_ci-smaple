@@ -9,7 +9,6 @@ class User extends CI_Controller {
 	public function __construct()
   {
 			parent::__construct();
-			$this->load->library('session');
 			$this->load->model('User_model');
   }
 
@@ -22,15 +21,25 @@ class User extends CI_Controller {
 
 	public function register()
 	{
+		$data["errorMessage"] = "";
+		$headData["pageName"] = "新規登録";
 		if(empty($_POST)){
-			$headData["pageName"] = "新規登録";
 			$this->load->view("head", $headData);
-			$this->load->view("user_register");
-			return;
+			$this->load->view("user_register", $data);
+			return; // 以降の処理を読み込ませない
 		}
 
 		// POSTされたとき
 		$email = $this->input->post("email");
+
+		// 既にユーザが存在すればエラーメッセージを出力する
+		if( !empty($this->User_model->fetchUsersWithEmail($email)) ){
+			$data["errorMessage"] = "既に存在するユーザです";
+			$this->load->view("head", $headData);
+			$this->load->view("user_register", $data);
+			return; // 以降の処理を読み込ませない
+		}
+
 		$password = $this->input->post("password");
 		$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 		$user = [
@@ -38,6 +47,12 @@ class User extends CI_Controller {
 			"password" => $hashedPassword,
 		];
 		$this->User_model->insert($user);
+
+		// 登録完了フラグをセットする
+		$_SESSION["doneRegister"] = true;
+
+		// トップページに戻る
+		header('location: /user-manager');
 	}
 
 	public function manage()
