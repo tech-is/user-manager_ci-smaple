@@ -1,4 +1,5 @@
 <body>
+  <h1>ホーム</h1>
   <div class="homeButtonWrapper">
     <div class="btn-box">
       <a class="btn primary" href="user/register">
