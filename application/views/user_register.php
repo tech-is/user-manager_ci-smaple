@@ -1,6 +1,6 @@
 <body>
   <h1>ユーザ情報を作成するページです</h1>
-  <p class="errorMessage"><?php echo $errorMessage; ?></p>
+  <p class="text-error"><?php echo $errorMessage; ?></p>
   <form method="POST">
     <div class="inputGroup">
       <label for="email">

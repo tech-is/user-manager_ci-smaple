@@ -1,13 +1,100 @@
-.homeButtonWrapper {
-  display:flex;
-  justify-content: space-between;
-  width: 50%;
-  margin: 100px auto;
+/*
+ * Width
+ */
+
+.w50{
+  width:50%;
 }
 
-.btn-box {
-  width: 100px;
+.w75{
+  width:75%;
 }
+
+/*
+ * /Width
+ */
+
+
+
+
+/*
+ * Margin
+ */
+
+.my-100{
+  margin-top:100px;
+  margin-bottom:100px;
+}
+
+.mx-auto{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/*
+ * /Margin
+ */
+
+
+
+
+/*
+ * Display
+ */
+
+.d-block{
+  display: block;
+}
+
+.d-flex{
+  display: flex;
+}
+
+/*
+ * /Display
+ */
+
+
+
+/*
+ * Text
+ */
+
+ .text-error{
+  color:#d32f2f;
+}
+
+.text-success{
+  color:#28a745;
+}
+
+.text-center{
+  text-align: center;
+}
+
+/*
+ * /Text
+ */
+
+
+
+/*
+ * Justify
+ */
+
+.justify-between{
+  justify-content: space-between;
+}
+
+/*
+ * /Justify
+ */
+
+
+
+/*
+ * Page Components
+ */
 
 .btn {
   display: block;
@@ -15,6 +102,15 @@
   text-align: center;
   text-decoration: none;
   padding: 10px;
+}
+
+.main-container{
+  margin:auto;
+  overflow: hidden;
+}
+
+.btn-box {
+  width: 100px;
 }
 
 .btn.primary {
@@ -30,6 +126,7 @@
   margin-bottom: 12px;
 }
 
-.errorMessage{
-  color:#d32f2f;
-}
+
+/*
+ * Page Components
+ */

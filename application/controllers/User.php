@@ -9,12 +9,19 @@ class User extends CI_Controller {
 	public function __construct()
   {
 			parent::__construct();
+			$this->load->library('session');
 			$this->load->model('User_model');
   }
 
 	public function index()
 	{
 		$headData["pageName"] = "ホーム";
+		$headData["doneRegister"] = false;
+		if(!empty($_SESSION) && array_key_exists("doneRegister", $_SESSION)){
+			$headData["doneRegister"] = true;
+			// 登録完了フラグを削除する
+			unset($_SESSION["doneRegister"]);
+		}
 		$this->load->view("head", $headData);
 		$this->load->view("home");
 	}
