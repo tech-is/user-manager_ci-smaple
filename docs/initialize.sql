@@ -16,6 +16,8 @@ CREATE TABLE `user` (
   `created_at` int(11) UNSIGNED NOT NULL COMMENT '作成日',
   `updated_at` int(11) UNSIGNED DEFAULT NULL COMMENT '更新日',
   `deleted_at` int(11) UNSIGNED DEFAULT NULL COMMENT '削除日',
+  `email` varchar(100) DEFAULT NULL COMMENT 'メールアドレス',
+  `password` varchar(255) DEFAULT NULL COMMENT 'パスワード',
   `name` varchar(50) DEFAULT NULL COMMENT '名前',
   `icon_url` varchar(255) DEFAULT NULL COMMENT 'プロフィールアイコンURL',
   `about` varchar(100) DEFAULT NULL COMMENT '自己紹介'

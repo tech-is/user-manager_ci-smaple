@@ -1,0 +1,132 @@
+/*
+ * Width
+ */
+
+.w50{
+  width:50%;
+}
+
+.w75{
+  width:75%;
+}
+
+/*
+ * /Width
+ */
+
+
+
+
+/*
+ * Margin
+ */
+
+.my-100{
+  margin-top:100px;
+  margin-bottom:100px;
+}
+
+.mx-auto{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/*
+ * /Margin
+ */
+
+
+
+
+/*
+ * Display
+ */
+
+.d-block{
+  display: block;
+}
+
+.d-flex{
+  display: flex;
+}
+
+/*
+ * /Display
+ */
+
+
+
+/*
+ * Text
+ */
+
+ .text-error{
+  color:#d32f2f;
+}
+
+.text-success{
+  color:#28a745;
+}
+
+.text-center{
+  text-align: center;
+}
+
+/*
+ * /Text
+ */
+
+
+
+/*
+ * Justify
+ */
+
+.justify-between{
+  justify-content: space-between;
+}
+
+/*
+ * /Justify
+ */
+
+
+
+/*
+ * Page Components
+ */
+
+.btn {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.main-container{
+  margin:auto;
+  overflow: hidden;
+}
+
+.btn-box {
+  width: 100px;
+}
+
+.btn.primary {
+  background-color: #26A69A;
+}
+
+
+.btn.secondary {
+  background-color: #42A5F5;
+}
+
+.inputGroup {
+  margin-bottom: 12px;
+}
+
+
+/*
+ * Page Components
+ */
