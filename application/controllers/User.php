@@ -16,14 +16,14 @@ class User extends CI_Controller {
 	public function index()
 	{
 		$headData["pageName"] = "ホーム";
-		$headData["doneRegister"] = false;
+		$data["doneRegister"] = false;
 		if(!empty($_SESSION) && array_key_exists("doneRegister", $_SESSION)){
-			$headData["doneRegister"] = true;
+			$data["doneRegister"] = true;
 			// 登録完了フラグを削除する
 			unset($_SESSION["doneRegister"]);
 		}
 		$this->load->view("head", $headData);
-		$this->load->view("home");
+		$this->load->view("home", $data);
 	}
 
 	public function register()
