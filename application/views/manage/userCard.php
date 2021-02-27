@@ -1,12 +1,16 @@
 <div class="card d-flex w100">
 
+<!-- Fixed-Section -->
   <div class="card-fixed btn-box">
     <?php if($user["id"] === $_SESSION["user"]): ?>
-      <a class="btn primary" href="user/mypage">
+      <a class="btn primary mypage" href="user/mypage">
         マイページ
       </a>
     <?php endif; ?>
-  </div>
+    <a class="btn secondary" href="user/edit?user_id=<?php echo $user["id"]; ?>">
+      編集
+    </a>
+  </div><!-- /Fixed-Section -->
 
   <!-- Left-Section-->
   <div class="card-left w25">

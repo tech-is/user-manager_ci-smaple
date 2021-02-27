@@ -105,6 +105,11 @@
  * Page Components
  */
 
+.main-container{
+  margin:auto;
+  overflow: hidden;
+}
+
 .btn {
   display: block;
   color: white;
@@ -115,9 +120,8 @@
   cursor: pointer;
 }
 
-.main-container{
-  margin:auto;
-  overflow: hidden;
+.btn.mypage{
+  margin-right: 1.2em;
 }
 
 #home .btn-box {
@@ -146,6 +150,7 @@
 }
 
 .card .card-fixed{
+  display: flex;
   position: absolute;
   right: 1.2em;
 }
