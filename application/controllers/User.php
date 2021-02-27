@@ -119,6 +119,10 @@ class User extends CI_Controller {
 		if(empty($_SESSION) || !array_key_exists("user", $_SESSION)){
 			header('location: /user-manager');
 		}
+
+		$headData["pageName"] = "マネージ";
+		$this->load->view("head", $headData);
+
 		$user_id = $_SESSION["user"];
 		$data["my"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );

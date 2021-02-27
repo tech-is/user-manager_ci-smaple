@@ -11,11 +11,12 @@ class User_model extends CI_Model {
         "id",
         "created_at",
         "updated_at",
+        "email",
         "name",
         "icon_url",
         "about",
     ];
-    protected $ignoreDeletedUserQuery = "deleted_at IS NOT NULL";
+    protected $ignoreDeletedUserQuery = "deleted_at IS NULL";
 
     public function __construct()
     {

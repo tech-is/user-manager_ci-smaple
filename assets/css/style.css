@@ -2,12 +2,20 @@
  * Width
  */
 
+.w25{
+  width:25%;
+}
+
 .w50{
   width:50%;
 }
 
 .w75{
   width:75%;
+}
+
+.w100{
+  width:100%;
 }
 
 /*
@@ -48,6 +56,7 @@
 
 .d-flex{
   display: flex;
+  flex-wrap: wrap;
 }
 
 /*
@@ -127,6 +136,36 @@
 }
 
 
+
+.card{
+  border: 2px dotted #455A64;
+  padding: 1em 1.2em;
+}
+
+.card .card-left{
+  text-align: center;
+}
+
+.card .card-label{
+  font-size: 17px;
+}
+
+.card .card-value{
+  font-size: 14px;
+}
+
+.card .card-right .card-section{
+  display: flex;
+  align-items: center;
+}
+
+.card .card-right .card-value{
+  margin-left: 20px;
+}
+
+.card .card-right{
+  text-align: left;
+}
 /*
  * Page Components
  */
