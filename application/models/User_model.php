@@ -54,6 +54,22 @@ class User_model extends CI_Model {
     }
 
     /**
+     * ユーザIDからユーザ情報を取得する
+     *
+     * @param int|bool $limit
+     * @return array|null
+     */
+    public function fetchUsersWithId(
+        $userId
+    )
+    {
+        return $this->db
+        ->where("id", $userId)
+        ->get( $this->table )
+        ->row_array();
+    }
+
+    /**
      * 削除されていないユーザ情報を取得する
      *
      * @param int|bool $limit

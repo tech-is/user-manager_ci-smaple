@@ -105,7 +105,9 @@ class User extends CI_Controller {
 
 		// ログインする
 		$_SESSION["user"] = $user["id"];
-		$this->load->view("user_login", $data);
+
+		// トップページに戻る
+		header('location: /user-manager/user/manage');
 	}
 
 	/**
@@ -113,6 +115,12 @@ class User extends CI_Controller {
 	 */
 	public function manage()
 	{
+		// ログイン状態でない場合はホームページにリダイレクト
+		if(empty($_SESSION) || !array_key_exists("user", $_SESSION)){
+			header('location: /user-manager');
+		}
+		$user_id = $_SESSION["user"];
+		$data["my"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
 		$this->load->view("user_manage", $data);
 	}
