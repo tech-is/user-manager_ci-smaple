@@ -41,15 +41,16 @@ class User_model extends CI_Model {
      * メールアドレスからユーザ情報を取得する
      *
      * @param int|bool $limit
-     * @return array
+     * @return array|null
      */
     public function fetchUsersWithEmail(
         $email
-    ) :array {
+    )
+    {
         return $this->db
         ->where("email", $email)
         ->get( $this->table )
-        ->result_array();
+        ->row_array();
     }
 
     /**
