@@ -3,11 +3,11 @@
 <!-- Fixed-Section -->
   <div class="card-fixed btn-box">
     <?php if($user["id"] === $_SESSION["user"]): ?>
-      <a class="btn primary mypage" href="user/mypage">
+      <a class="btn primary mr-12" href="/user-manager/user/mypage">
         マイページ
       </a>
     <?php endif; ?>
-    <a class="btn secondary" href="user/edit?user_id=<?php echo $user["id"]; ?>">
+    <a class="btn secondary" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
       編集
     </a>
   </div><!-- /Fixed-Section -->
