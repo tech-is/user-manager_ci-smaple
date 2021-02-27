@@ -1,5 +1,13 @@
 <div class="card d-flex w100">
 
+  <div class="card-fixed btn-box">
+    <?php if($user["id"] === $_SESSION["user"]): ?>
+      <a class="btn primary" href="user/mypage">
+        マイページ
+      </a>
+    <?php endif; ?>
+  </div>
+
   <!-- Left-Section-->
   <div class="card-left w25">
 

@@ -1,4 +1,4 @@
-<body>
+<body id="home">
   <div class="main-container w75 text-center">
     <h1>ホーム</h1>
     <?php if($doneRegister): ?>
