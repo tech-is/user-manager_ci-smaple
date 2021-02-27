@@ -13,6 +13,9 @@ class User extends CI_Controller {
 			$this->load->model('User_model');
   }
 
+	/**
+	 * ホーム画面
+	 */
 	public function index()
 	{
 		$headData["pageName"] = "ホーム";
@@ -26,12 +29,16 @@ class User extends CI_Controller {
 		$this->load->view("home", $data);
 	}
 
+	/**
+	 * 新規登録ページ
+	 */
 	public function register()
 	{
-		$data["errorMessage"] = "";
 		$headData["pageName"] = "新規登録";
+		$this->load->view("head", $headData);
+
+		$data["errorMessage"] = "";
 		if(empty($_POST)){
-			$this->load->view("head", $headData);
 			$this->load->view("user_register", $data);
 			return; // 以降の処理を読み込ませない
 		}
@@ -39,10 +46,11 @@ class User extends CI_Controller {
 		// POSTされたとき
 		$email = $this->input->post("email");
 
+		$user = $this->User_model->fetchUsersWithEmail($email);
+
 		// 既にユーザが存在すればエラーメッセージを出力する
-		if( !empty($this->User_model->fetchUsersWithEmail($email)) ){
+		if( !is_null($user) ){
 			$data["errorMessage"] = "既に存在するユーザです";
-			$this->load->view("head", $headData);
 			$this->load->view("user_register", $data);
 			return; // 以降の処理を読み込ませない
 		}
@@ -62,8 +70,57 @@ class User extends CI_Controller {
 		header('location: /user-manager');
 	}
 
+	/**
+	 * ログインページ
+	 */
+	public function login()
+	{
+		$headData["pageName"] = "ログイン";
+		$this->load->view("head", $headData);
+
+		$data["errorMessage"] = "";
+		if(empty($_POST)){
+			$this->load->view("user_login", $data);
+			return; // 以降の処理を読み込ませない
+		}
+
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+
+		$user = $this->User_model->fetchUsersWithEmail($email);
+
+		// ユーザが存在しなければログインエラー
+		if( empty($user) ){
+			$data["errorMessage"] = "ユーザは存在しません";
+			$this->load->view("user_login", $data);
+			return; // 以降の処理を読み込ませない
+		}
+
+		// パスワードが一致しない場合
+		if(!password_verify($password, $user["password"])){
+			$data["errorMessage"] = "パスワードが一致しません";
+			$this->load->view("user_login", $data);
+			return; // 以降の処理を読み込ませない
+		}
+
+		// ログインする
+		$_SESSION["user"] = $user["id"];
+
+		// トップページに戻る
+		header('location: /user-manager/user/manage');
+	}
+
+	/**
+	 * マネージ画面（ダッシュボード）
+	 */
 	public function manage()
 	{
+		// ログイン状態でない場合はホームページにリダイレクト
+		if(empty($_SESSION) || !array_key_exists("user", $_SESSION)){
+			header('location: /user-manager');
+		}
+		$user_id = $_SESSION["user"];
+		$data["my"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
 		$this->load->view("user_manage", $data);
 	}
