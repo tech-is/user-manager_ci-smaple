@@ -2,7 +2,7 @@
 
 <!-- Fixed-Section -->
   <div class="card-fixed btn-box">
-    <?php if($user["id"] === $_SESSION["user"]): ?>
+    <?php if($user["id"] === $my["id"]): ?>
       <a class="btn primary mr-12" href="/user-manager/user/mypage">
         マイページ
       </a>
