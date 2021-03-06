@@ -129,6 +129,7 @@ class User extends CI_Controller {
 		$user_id = $_SESSION["user"];
 		$data["my"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
+		$data["masterUserId"] = $this->User_model->fetchMasterUserId();
 		$this->load->view("user_manage", $data);
 	}
 

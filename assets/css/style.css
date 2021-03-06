@@ -147,6 +147,10 @@
   background-color: #17a2b8;
 }
 
+.btn.light {
+  background-color: #9E9E9E;
+}
+
 .inputGroup {
   margin-bottom: 12px;
 }

@@ -2,14 +2,21 @@
 
 <!-- Fixed-Section -->
   <div class="card-fixed btn-box">
+    <?php if($user["id"] === $masterUserId): ?>
+      <div class="btn light mr-12">
+        管理者
+      </div>
+    <?php endif; ?>
     <?php if($user["id"] === $my["id"]): ?>
       <a class="btn primary mr-12" href="/user-manager/user/mypage">
         マイページ
       </a>
     <?php endif; ?>
-    <a class="btn secondary" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
-      編集
-    </a>
+    <?php if($user["id"] === $my["id"] || $my["id"] === $masterUserId): ?>
+      <a class="btn secondary" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
+        編集
+      </a>
+    <?php endif; ?>
   </div><!-- /Fixed-Section -->
 
   <!-- Left-Section-->
