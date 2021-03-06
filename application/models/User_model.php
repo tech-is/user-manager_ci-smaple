@@ -11,11 +11,12 @@ class User_model extends CI_Model {
         "id",
         "created_at",
         "updated_at",
+        "email",
         "name",
         "icon_url",
         "about",
     ];
-    protected $ignoreDeletedUserQuery = "deleted_at IS NOT NULL";
+    protected $ignoreDeletedUserQuery = "deleted_at IS NULL";
 
     public function __construct()
     {
@@ -67,6 +68,24 @@ class User_model extends CI_Model {
         ->where("id", $userId)
         ->get( $this->table )
         ->row_array();
+    }
+
+    /**
+     * マスタユーザを取得する
+     *
+     * @return int
+     */
+    public function fetchMasterUserId():string
+    {
+        return $this->db
+        ->select( "id" )
+        ->where( $this->ignoreDeletedUserQuery )
+        ->order_by(
+            $this->defaultOrderColumn,
+            $this->defaultOrderSort
+        )
+        ->get( $this->table )
+        ->row_array()["id"];
     }
 
     /**
