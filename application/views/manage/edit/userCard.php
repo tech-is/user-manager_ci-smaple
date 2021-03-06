@@ -8,7 +8,7 @@
   </div><!-- /Fixed-Section -->
 
   <!-- Left-Section-->
-  <div class="card-left w25">
+  <div class="card-left w40">
 
     <!-- プロフィールアイコン -->
     <div class="card-section">
@@ -22,12 +22,13 @@
           <img src="<?php echo $user["icon_url"]; ?>">
         </p>
       <?php endif; ?>
+      <input type="file" name="iconImage" accept="image/*">
     </div><!-- /プロフィールアイコン -->
 
   </div><!-- /Left-Section-->
 
   <!-- Right-Section-->
-  <div class="card-right w75">
+  <div class="card-right w60">
 
     <!-- ユーザ名 -->
     <div class="card-section">

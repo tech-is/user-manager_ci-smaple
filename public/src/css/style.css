@@ -1,3 +1,7 @@
+img{
+  max-width: 100%;
+}
+
 input[readonly]{
   background-color: #e9ecef;
   opacity: 1;
@@ -7,16 +11,16 @@ input[readonly]{
  * Width
  */
 
-.w25{
-  width:25%;
+.w40{
+  width:40%;
 }
 
 .w50{
   width:50%;
 }
 
-.w75{
-  width:75%;
+.w60{
+  width:60%;
 }
 
 .w100{
@@ -74,7 +78,7 @@ input[readonly]{
  * Text
  */
 
- .text-error{
+.text-error{
   color:#d32f2f;
 }
 
@@ -166,6 +170,7 @@ input[readonly]{
   border: 2px dotted #455A64;
   padding: 1em 1.2em;
   position: relative;
+  align-items: center;
 }
 
 .card .card-fixed{
@@ -185,6 +190,14 @@ input[readonly]{
 
 .card .card-value{
   font-size: 14px;
+}
+
+.card .card-left .card-value{
+  width: 80%;
+  margin: auto;
+}
+.card .card-left input[name="iconImage"]{
+  margin-top:1.2em;
 }
 
 .card .card-right .card-section{

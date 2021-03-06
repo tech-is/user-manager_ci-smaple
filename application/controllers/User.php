@@ -5,16 +5,18 @@ class User extends CI_Controller {
 
 	// 制限無くユーザ情報を取得する
 	protected $fetchLimit = false;
+	protected $uploadDir = FCPATH."/public/upload/";
+	protected $uploadUri = "/user-manager/public/upload/";
 
 	public function __construct()
   {
-			parent::__construct();
-			$this->load->helper('functions');
-			$this->load->library('session');
-			$this->load->model('User_model');
+		parent::__construct();
+		$this->load->helper('functions');
+		$this->load->library('session');
+		$this->load->model('User_model');
 
-			// 自動でサニタイズする
-			_hMethod();
+		// 自動でサニタイズする
+		_hMethod();
   }
 
 	/**
@@ -186,6 +188,34 @@ class User extends CI_Controller {
 
 		// マスタユーザでは無い場合、他ユーザの編集はできなので "ホーム" に戻る
 		if( $masterUserId !== $_SESSION["user"] && $user["id"] !== $_SESSION["user"]){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$isEdited = false;
+		if(!empty($_POST)){
+			$this->User_model->update($user_id, $_POST);
+			$isEdited = true;
+		}
+
+		// COMMENT:エラーが無いことを明示的に確認する
+		if(!empty($_FILES) && $_FILES["iconImage"]["error"] === 0){
+			$file = $_FILES['iconImage'];
+			$uploadFile = $file['tmp_name'];
+			$uploadPath = $this->uploadDir . $file['name'];
+			$isUploadImageSuccess = move_uploaded_file($uploadFile, $uploadPath);
+			if($isUploadImageSuccess){
+				$data = [
+					"icon_url" => $this->uploadUri.$file['name']
+				];
+				$this->User_model->update($user_id, $data);
+				$isEdited = true;
+			}
+		}
+
+		// ユーザ編集後は "ホーム" に戻る
+		if($isEdited){
 			redirect(
 				"/user-manager/user/manage"
 			);

@@ -1,5 +1,5 @@
 <body id="manage">
-  <div class="main-container w75 text-center">
+  <div class="main-container w60 text-center">
     <div class="d-flex container-fixed">
       <a class="btn secondary mr-12" href="/user-manager/user/manage">
         ホーム
