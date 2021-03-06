@@ -9,6 +9,7 @@ class User extends CI_Controller {
 	public function __construct()
   {
 			parent::__construct();
+			$this->load->helper('functions');
 			$this->load->library('session');
 			$this->load->model('User_model');
   }
@@ -67,8 +68,7 @@ class User extends CI_Controller {
 		$_SESSION["doneRegister"] = true;
 
 		// トップページに戻る
-		header('location: /user-manager');
-		exit();
+		redirect("/user-manager");
 	}
 
 	/**
@@ -108,8 +108,9 @@ class User extends CI_Controller {
 		$_SESSION["user"] = $user["id"];
 
 		// トップページに戻る
-		header('location: /user-manager/user/manage');
-		exit();
+		redirect(
+			"/user-manager/user/manage"
+		);
 	}
 
 	/**
@@ -118,11 +119,9 @@ class User extends CI_Controller {
 	public function manage()
 	{
 		// ログイン状態でない場合はホームページにリダイレクト
-		if(empty($_SESSION) || !array_key_exists("user", $_SESSION)){
-			header('location: /user-manager');
-			exit();
+		if( !isLoginUser() ){
+			redirect("/user-manager");
 		}
-
 		$headData["pageName"] = "マネージ";
 		$this->load->view("head", $headData);
 
@@ -134,13 +133,30 @@ class User extends CI_Controller {
 	}
 
 	/**
+	 * マネージ画面（マイページ）
+	 */
+	public function mypage()
+	{
+		if( !isLoginUser() ){
+			redirect("/user-manager");
+		}
+
+		$headData["pageName"] = "マネージ";
+		$this->load->view("head", $headData);
+
+		$user_id = $_SESSION["user"];
+		$data["user"] = $this->User_model->fetchUsersWithId( $user_id );
+		$data["masterUserId"] = $this->User_model->fetchMasterUserId();
+		$this->load->view("user_mypage", $data);
+	}
+
+	/**
 	 * ログアウト
 	 */
 	public function logout()
 	{
 		session_destroy();
-		header('location: /user-manager');
-		exit();
+		redirect("/user-manager");
 	}
 
 }
