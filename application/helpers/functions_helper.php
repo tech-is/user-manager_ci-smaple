@@ -13,3 +13,22 @@ function redirect(
   header($toLocation);
   exit();
 }
+
+/**
+ * リクエストメソッドに応じてサニタイズする
+ *
+ * @return void
+ */
+function _hMethod()
+{
+  $requestMethod = $_SERVER["REQUEST_METHOD"];
+  if($requestMethod === "GET"){
+    foreach($_GET as $key => $value){
+      $_GET[$key] = $value;
+    }
+  }
+  foreach($_POST as $key => $value){
+    $_POST[$key] = $value;
+  }
+  // COMMENT:スーパーグローバル変数なので返り値不要
+}

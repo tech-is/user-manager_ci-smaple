@@ -12,6 +12,9 @@ class User extends CI_Controller {
 			$this->load->helper('functions');
 			$this->load->library('session');
 			$this->load->model('User_model');
+
+			// 自動でサニタイズする
+			_hMethod();
   }
 
 	/**
@@ -122,7 +125,7 @@ class User extends CI_Controller {
 		if( !isLoginUser() ){
 			redirect("/user-manager");
 		}
-		$headData["pageName"] = "マネージ";
+		$headData["pageName"] = "マネージ画面 | ホーム";
 		$this->load->view("head", $headData);
 
 		$user_id = $_SESSION["user"];
@@ -141,13 +144,55 @@ class User extends CI_Controller {
 			redirect("/user-manager");
 		}
 
-		$headData["pageName"] = "マネージ";
+		$headData["pageName"] = "マイページ | マイページ";
 		$this->load->view("head", $headData);
 
 		$user_id = $_SESSION["user"];
 		$data["user"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["masterUserId"] = $this->User_model->fetchMasterUserId();
 		$this->load->view("user_mypage", $data);
+	}
+
+	/**
+	 * マネージ画面（編集ページ）
+	 */
+	public function edit()
+	{
+		if( !isLoginUser() ){
+			redirect("/user-manager");
+		}
+
+		// ユーザIDパラメータが無い場合は"ホーム"に戻る
+		if( !isLoginUser() ){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$headData["pageName"] = "マイページ | 編集";
+		$this->load->view("head", $headData);
+
+		$user_id = $_GET["user_id"];
+		$user = $this->User_model->fetchUsersWithId( $user_id );
+
+		// 存在しないユーザを編集できないので "ホームに戻る"
+		if( empty($user) ){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$masterUserId = $this->User_model->fetchMasterUserId();
+
+		// マスタユーザでは無い場合、他ユーザの編集はできなので "ホーム" に戻る
+		if( $masterUserId !== $_SESSION["user"] && $user["id"] !== $_SESSION["user"]){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$data["user"] = $user;
+		$this->load->view("user_edit", $data);
 	}
 
 	/**
