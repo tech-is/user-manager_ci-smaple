@@ -8,9 +8,11 @@
         ログアウト
       </a>
     </div>
-    <h1>マイページ</h1>
-    <div class="d-flex">
-      <?php include(__DIR__."/manage/mypage/userCard.php") ?>
-    </div>
+    <h1>ユーザ編集</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+      <div class="d-flex">
+          <?php include(__DIR__."/manage/edit/userCard.php") ?>
+      </div>
+    </form>
   </div>
 </body>

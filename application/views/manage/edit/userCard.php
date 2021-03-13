@@ -2,21 +2,9 @@
 
 <!-- Fixed-Section -->
   <div class="card-fixed btn-box">
-    <?php if($user["id"] === $masterUserId): ?>
-      <div class="btn light mr-12">
-        管理者
-      </div>
-    <?php endif; ?>
-    <?php if($user["id"] === $my["id"]): ?>
-      <a class="btn primary mr-12" href="/user-manager/user/mypage">
-        マイページ
-      </a>
-    <?php endif; ?>
-    <?php if($user["id"] === $my["id"] || $my["id"] === $masterUserId): ?>
-      <a class="btn secondary" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
-        編集
-      </a>
-    <?php endif; ?>
+    <button class="btn secondary" type="submit">
+      保存
+    </button>
   </div><!-- /Fixed-Section -->
 
   <!-- Left-Section-->
@@ -34,6 +22,7 @@
           <img src="<?php echo $user["icon_url"]; ?>">
         </p>
       <?php endif; ?>
+      <input type="file" name="iconImage" accept="image/*">
     </div><!-- /プロフィールアイコン -->
 
   </div><!-- /Left-Section-->
@@ -47,7 +36,7 @@
         ユーザ名：
       </p>
       <p class="card-value">
-        <?php echo $user["name"]; ?>
+      <input type="text" name="name" value="<?php echo $user["name"]; ?>">
       </p>
     </div><!-- /ユーザ名 -->
 
@@ -57,7 +46,7 @@
         メールアドレス：
       </p>
       <p class="card-value">
-        <?php echo $user["email"]; ?>
+        <input type="email" name="email" value="<?php echo $user["email"]; ?>" readonly>
       </p>
     </div><!-- /メールアドレス -->
 
@@ -67,7 +56,7 @@
         自己紹介：
       </p>
       <p class="card-value">
-        <?php echo $user["about"]; ?>
+        <input type="text" name="about" value="<?php echo $user["about"]; ?>">
       </p>
     </div><!-- /自己紹介 -->
 

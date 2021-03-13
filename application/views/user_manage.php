@@ -1,5 +1,5 @@
 <body id="manage">
-  <div class="main-container w75 text-center">
+  <div class="main-container w60 text-center">
     <div class="container-fixed">
       <a class="btn info" href="/user-manager/user/logout">
         ログアウト
