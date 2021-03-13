@@ -165,7 +165,7 @@ class User extends CI_Controller {
 		}
 
 		// ユーザIDパラメータが無い場合は"ホーム"に戻る
-		if( !isLoginUser() ){
+		if( empty($_GET) || array_key_exists("user_id",$_GET)) {
 			redirect(
 				"/user-manager/user/manage"
 			);
