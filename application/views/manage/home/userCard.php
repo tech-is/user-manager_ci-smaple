@@ -13,8 +13,13 @@
       </a>
     <?php endif; ?>
     <?php if($user["id"] === $my["id"] || $my["id"] === $masterUserId): ?>
-      <a class="btn secondary" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
+      <a class="btn secondary mr-12" href="/user-manager/user/edit?user_id=<?php echo $user["id"]; ?>">
         編集
+      </a>
+    <?php endif; ?>
+    <?php if($user["id"] === $my["id"] || $my["id"] === $masterUserId): ?>
+      <a class="btn danger" href="/user-manager/user/delete?user_id=<?php echo $user["id"]; ?>">
+        削除
       </a>
     <?php endif; ?>
   </div><!-- /Fixed-Section -->

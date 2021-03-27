@@ -130,6 +130,15 @@ class User extends CI_Controller {
 		$headData["pageName"] = "マネージ画面 | ホーム";
 		$this->load->view("head", $headData);
 
+		$data["doneDelete"] = false;
+
+		// ユーザ削除完了フラグがある場合
+		if(!empty($_SESSION) && array_key_exists("doneDelete", $_SESSION)){
+			$data["doneDelete"] = true;
+			// 登録完了フラグを削除する
+			unset($_SESSION["doneDelete"]);
+		}
+
 		$user_id = $_SESSION["user"];
 		$data["my"] = $this->User_model->fetchUsersWithId( $user_id );
 		$data["users"] = $this->User_model->fetchUsers( $this->fetchLimit );
@@ -223,6 +232,53 @@ class User extends CI_Controller {
 
 		$data["user"] = $user;
 		$this->load->view("user_edit", $data);
+	}
+
+	/**
+	 * マネージ画面（ユーザ削除）
+	 */
+	public function delete()
+	{
+		if( !isLoginUser() ){
+			redirect("/user-manager");
+		}
+
+		// ユーザIDパラメータが無い場合は"ホーム"に戻る
+		if( empty($_GET) || !array_key_exists("user_id",$_GET)) {
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$user_id = $_GET["user_id"];
+		$user = $this->User_model->fetchUsersWithId( $user_id );
+
+		// 存在しないユーザを編集できないので "ホームに戻る"
+		if( empty($user) ){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		$masterUserId = $this->User_model->fetchMasterUserId();
+
+		// マスタユーザでは無い場合、他ユーザの編集はできなので "ホーム" に戻る
+		if( $masterUserId !== $_SESSION["user"] && $user["id"] !== $_SESSION["user"]){
+			redirect(
+				"/user-manager/user/manage"
+			);
+		}
+
+		// ユーザを削除する
+		$this->User_model->delete($user_id);
+
+		// 削除完了フラグをセットする
+		$_SESSION["doneDelete"] = true;
+
+		// ホームに戻る
+		redirect(
+			"/user-manager/user/manage"
+		);
 	}
 
 	/**

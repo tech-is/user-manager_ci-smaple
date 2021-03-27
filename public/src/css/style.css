@@ -156,6 +156,10 @@ input[readonly]{
   background-color: #17a2b8;
 }
 
+.btn.danger {
+  background-color: #fc544b;
+}
+
 .btn.light {
   background-color: #9E9E9E;
 }
